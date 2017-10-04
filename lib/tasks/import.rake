@@ -18,11 +18,12 @@ invoice_item_csv = "db/csv/invoice_items.csv"
 invoice_csv = "db/csv/invoices.csv"
 customer_csv = "db/csv/customers.csv"
 
-  CSV.foreach(merchant_csv, :headers => true) do |row|
+  CSV.foreach(merchant_csv, :headers => true, header_converters: :symbol) do |row|
+    # binding.pry
       Merchant.create({
-        :name => row[1],
-        :created_at => row[2],
-        :updated_at => row[3]
+        :name => row[:name],
+        :created_at => row[:created_at],
+        :updated_at => row[:updated_at]
       })
     end
 
