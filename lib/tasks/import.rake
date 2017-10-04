@@ -27,13 +27,6 @@ customer_csv = "db/csv/customers.csv"
       })
     end
 
-  # data = File.read('db/csv/merchants.csv')
-  #   csv = CSV.parse(data, :headers => true)
-  #   csv.each do |row|
-  #     binding.pry
-  #     Merchant.create!(row.to_hash)
-  #   end
-
   puts "merchants seeded!"
 
   CSV.foreach(customer_csv, :headers => true) do |row|
@@ -63,9 +56,10 @@ customer_csv = "db/csv/customers.csv"
     Transaction.create({
       :invoice_id => row[1],
       :credit_card_number => row[2],
-      :result => row[3],
-      :created_at => row[4],
-      :updated_at => row[5]
+      #:credit_card_exp => [3],
+      :result => row[4],
+      :created_at => row[5],
+      :updated_at => row[6]
     })
   end
 
