@@ -120,5 +120,17 @@ describe "Items API" do
     expect(itemfind.count).to eq(2)
   end
 
+  it "finds all by created at" do
+    item1, item2 = create_list(:item, 2, created_at: "Dec 11 2008")
+    item3 = create(:item, created_at: "Jun 01 1998")
+
+    get "/api/v1/items/find_all?created_at=#{item1.created_at}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind.count).to eq(2)
+  end
+
 
 end
