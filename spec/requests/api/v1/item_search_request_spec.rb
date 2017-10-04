@@ -15,6 +15,12 @@ describe "Items API" do
   it "finds by name" do
     item = create(:item)
 
+    get "/api/v1/items/find?name=#{item.name}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind["name"]).to eq(item.name)
   end
 
   it "finds by description" do
