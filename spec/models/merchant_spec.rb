@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Merchant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  create_list(:merchant, 3)
+
+  Expect(Merchant.top_by_revenue(quantity)).to eq ()
+
 end
