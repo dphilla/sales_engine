@@ -34,8 +34,15 @@ describe "Merchants API" do
     expect(merchant["created_at"]).to eq(merch1.created_at)
   end
 
-  it "finds by updated at date" do
+  xit "finds by updated at date" do
+    merch1, merch2, merch3 = create_list(:merchant, 3)
 
+    get "/api/v1/merchants/find?updated_at=#{merch1.updated_at}"
+# binding.pry
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(merchant["updated_at"]).to eq(merch1.updated_at)
   end
 
 end
