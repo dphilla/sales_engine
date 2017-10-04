@@ -25,6 +25,5 @@ describe "invoice request" do
 
      expect(invoice["id"]).to eq(Invoice.last.id)
 
-
    end
 end

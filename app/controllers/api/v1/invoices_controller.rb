@@ -10,6 +10,7 @@ module Api # a more common namespacing technique (as opposed to scope resolution
         render json: Invoice.find(params[:id])
       end
 
+      def
 
 
       private
