@@ -9,6 +9,13 @@ class Api::V1::Items::SearchController < ApplicationController
     end
   end
 
+  def index
+    if search_params["unit_price"]
+      render json: Item.find_all_by_unit_price(search_params)
+    else
+      render json: Item.where(search_params)
+    end 
+  end
 
   private
 

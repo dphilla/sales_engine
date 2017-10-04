@@ -80,5 +80,25 @@ describe "Items API" do
     expect(itemfind["id"]).to eq(item.id)
   end
 
+end
+
+describe "Items API" do
+  it "finds all by name" do
+    items = create_list(:item, 3)
+
+    get "/api/v1/items/find_all?name=#{items[1].name}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind.count).to eq(3)
+    expect(itemfind[1]["name"]).to eq("MyItem")
+  end
+
+  it "finds all by unit price" do
+
+  end
+
+
 
 end
