@@ -46,16 +46,38 @@ describe "Items API" do
     expect(itemfind["unit_price"]).to eq(item.unit_price)
   end
 
-  it "finds by merchant id" do
+  xit "finds by merchant id" do
+    merchant = create(:merchant)
+    item = create(:item, merchant_id: merchant.id)
 
+    get "/api/v1/items/#{item.id}/merchant"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result["id"]).to eq(merchant.id)
   end
 
   it "finds by created at" do
+    item = create(:item, created_at: "Apr 1 2000")
 
+    get "/api/v1/items/find?created_at=#{item.created_at}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind["id"]).to eq(item.id)
   end
 
   it "finds by updated at" do
+    item = create(:item, updated_at: "Apr 1 2000")
 
+    get "/api/v1/items/find?updated_at=#{item.updated_at}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind["id"]).to eq(item.id)
   end
 
 
