@@ -11,6 +11,10 @@ class Api::V1::Merchants::SearchController < ApplicationController
     render json: Merchant.find_by(search_params)
   end
 
+  def rand
+    render json: randomize(Merchant)
+  end
+
 
   private
 
