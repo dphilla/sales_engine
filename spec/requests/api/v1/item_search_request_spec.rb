@@ -108,6 +108,17 @@ describe "Items API" do
     expect(itemfind.count).to eq(2)
   end
 
+  it "finds all by description" do
+    item1, item2 = create_list(:item, 2)
+    item3 = create(:item, description: "some thing")
+
+    get "/api/v1/items/find_all?description=#{item1.description}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind.count).to eq(2)
+  end
 
 
 end
