@@ -96,7 +96,16 @@ describe "Items API" do
   end
 
   it "finds all by unit price" do
+    item1, item2 = create_list(:item, 2)
+    item3 = create(:item, unit_price: 9999)
+    item_price = (item1.unit_price / 100).to_s
 
+    get "/api/v1/items/find_all?unit_price=#{item_price}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind.count).to eq(2)
   end
 
 
