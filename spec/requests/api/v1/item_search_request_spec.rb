@@ -24,7 +24,14 @@ describe "Items API" do
   end
 
   it "finds by description" do
+    item = create(:item)
 
+    get "/api/v1/items/find?description=#{item.description}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind["description"]).to eq(item.description)
   end
 
   it "finds by unit price" do
