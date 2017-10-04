@@ -2,7 +2,11 @@
 class Api::V1::Items::SearchController < ApplicationController
 
   def show
-    render json: Item.find_by(search_params)
+    if search_params["unit_price"]
+      render json: Item.find_one_by_unit_price(search_params)
+    else
+      render json: Item.find_by(search_params)
+    end
   end
 
 

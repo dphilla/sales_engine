@@ -35,7 +35,15 @@ describe "Items API" do
   end
 
   it "finds by unit price" do
+    item = create(:item)
+    item_price = (item.unit_price / 100).to_s
 
+    get "/api/v1/items/find?unit_price=#{item_price}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind["unit_price"]).to eq(item.unit_price)
   end
 
   it "finds by merchant id" do
