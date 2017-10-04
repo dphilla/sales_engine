@@ -132,5 +132,15 @@ describe "Items API" do
     expect(itemfind.count).to eq(2)
   end
 
+  it "finds all by updated at" do
+    item1, item2 = create_list(:item, 2, updated_at: "Dec 11 2008")
+    item3 = create(:item, updated_at: "Jun 01 1998")
 
+    get "/api/v1/items/find_all?updated_at=#{item1.updated_at}"
+
+    itemfind = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(itemfind.count).to eq(2)
+  end
 end
