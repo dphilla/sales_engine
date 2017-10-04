@@ -48,11 +48,19 @@ end
 
 describe "Merchants API" do
   it "finds all by id" do
-
+    
   end
 
   it "finds all by name" do
+    merchants = create_list(:merchant, 3, name: "Merchguy")
 
+    get "/api/v1/merchants/find_all?name=#{merchants[1].name}"
+
+    json = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(json.count).to eq(3)
+    expect(json[1]["name"]).to eq("Merchguy")
   end
 
   it "finds all by created at" do
