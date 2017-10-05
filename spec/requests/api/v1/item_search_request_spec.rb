@@ -46,16 +46,15 @@ describe "Items API" do
     expect(itemfind["id"]).to eq(item.id)
   end
 
-  xit "finds by merchant id" do
-    merchant = create(:merchant)
-    item = create(:item, merchant_id: merchant.id)
+  it "finds by merchant id" do
+    item = create(:item)
 
-    get "/api/v1/items/#{item.id}/merchant"
+    get "/api/v1/items/find?merchant_id=#{item.merchant_id}"
 
     result = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(result["id"]).to eq(merchant.id)
+    expect(result["merchant_id"]).to eq(item.merchant_id)
   end
 
   it "finds by created at" do
