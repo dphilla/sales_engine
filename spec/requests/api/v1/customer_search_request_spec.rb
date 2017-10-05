@@ -25,7 +25,14 @@ describe "Customers API" do
   end
 
   it "finds by last name" do
+    cust1, cust2 = create_list(:customer, 2)
 
+    get "/api/v1/customers/find?last_name=#{cust2.last_name}"
+
+    customer = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(customer["last_name"]).to eq(cust2.last_name)
   end
 
   it "finds by created at" do
