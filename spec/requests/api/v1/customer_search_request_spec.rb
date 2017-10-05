@@ -35,12 +35,26 @@ describe "Customers API" do
     expect(customer["last_name"]).to eq(cust2.last_name)
   end
 
-  it "finds by created at" do
+  it "finds by created at date" do
+    cust1 = create(:customer, created_at: "Jul 1 1999")
 
+    get "/api/v1/customers/find?created_at=#{cust1.created_at}"
+
+    customer = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(customer["id"]).to eq(cust1.id)
   end
 
   it "finds by updated at" do
+    cust1 = create(:customer, updated_at: "Jul 1 1999")
 
+    get "/api/v1/customers/find?updated_at=#{cust1.updated_at}"
+
+    customer = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(customer["id"]).to eq(cust1.id)
   end
 end
 
