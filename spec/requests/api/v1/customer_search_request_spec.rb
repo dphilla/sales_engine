@@ -60,11 +60,27 @@ end
 
 describe "Customers API" do
   it "finds all by first name" do
+    customers = create_list(:customer, 3)
 
+    get "/api/v1/customers/find_all?first_name=#{customers[1].first_name}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(3)
+    expect(result[1]["first_name"]).to eq("Homer")
   end
 
   it "finds all by last name" do
+    customers = create_list(:customer, 3, last_name: "Lee")
 
+    get "/api/v1/customers/find_all?last_name=#{customers[1].last_name}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(3)
+    expect(result[1]["last_name"]).to eq("Lee")
   end
 
   it "finds all by created at" do
