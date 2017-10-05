@@ -35,14 +35,17 @@ Rails.application.routes.draw do
         get "/random", to: "search#rand"
       end
 
+
       namespace :invoice_items do
         get "/find", to: "search#show"
         get "/find_all", to: "search#index"
         get "/random", to: "search#rand"
       end
 
+
       resources :merchants, only: [:index, :show] do
         get "/items", to: "merchants/items#index"
+        get "/invoices", to: "merchants/invoices#index"
       end
       resources :items, only: [:index, :show]
 
