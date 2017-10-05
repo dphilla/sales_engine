@@ -5,20 +5,20 @@ class Merchant < ApplicationRecord
 
 
   def self.top_by_most_revenue(quantity)
-    Merchant.joins(invoices: [:transactions, :invoice_items])
-            .merge(Transaction.successful)
+            joins(invoices: [:transactions, :invoice_items])
+            .merge(Transaction.unscoped.successful)
             .group(:id)
-            .order("sum(quantity * unit_price)")
+            .order("sum(quantity * unit_price) DESC")
             .limit(quantity) #should add condition for non-nums, etc.
   end
 
-  #def self.top_by_most_items(quantity)
-     #Merchant.joins(invoices: [:transactions, :invoice_items])
-            #.merge(Transaction.successful)
-            #.group(:id)
-            #.order("sum(quantity) DESC")
-            #.limit(quantity)
-  #end
+  def self.top_by_most_items(quantity)
+     Merchant.joins(invoices: [:transactions, :invoice_items])
+            .merge(Transaction.successful)
+            .group(:id)
+            .order("sum(quantity) DESC")
+            .limit(quantity)
+  end
 
   #def self.top_by_most_items(date)
     #Merchant.joins(invoices: [:transactions, :invoice_items])
