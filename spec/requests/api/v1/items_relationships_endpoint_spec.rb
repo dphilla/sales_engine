@@ -15,8 +15,8 @@ describe "invoices_items relationships" do
   end
 
   it "finds merchant for item" do
-    item = create(:item)
     merchant = create(:merchant)
+    item = create(:item, merchant_id: merchant.id)
 
     get "/api/v1/items/#{item.id}/merchant"
 
