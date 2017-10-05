@@ -14,5 +14,8 @@ class Item < ApplicationRecord
     where(unit_price_params)
   end
 
+  def self.default_scope
+    order(:id)
+  end
 
 end
