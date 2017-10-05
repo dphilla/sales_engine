@@ -84,11 +84,25 @@ describe "Customers API" do
   end
 
   it "finds all by created at" do
+    cust1, cust2, cust3 = create_list(:customer, 3, created_at: "May 1 1985")
 
+    get "/api/v1/customers/find_all?created_at=#{cust1.created_at}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(3)
   end
 
   it "finds all by updated at" do
+    cust1, cust2, cust3 = create_list(:customer, 3, updated_at: "May 1 1985")
 
+    get "/api/v1/customers/find_all?updated_at=#{cust1.updated_at}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(3)
   end
 
 end
