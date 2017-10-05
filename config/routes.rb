@@ -7,7 +7,9 @@ Rails.application.routes.draw do
         get "/find", to: "search#show"
         get "/random", to: "search#rand"
         get "/find_all", to: "search#index"
-        get "/most_revenue", to: "most_revenue#show"
+        get "/most_revenue", to: "most_revenue#index"
+        get "/most_items", to: "most_items#index"
+        get "/revenue", to: "total_revenue_by_date#show"
       end
 
       namespace :items do
