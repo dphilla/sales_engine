@@ -59,14 +59,37 @@ end
 
 describe "Transactions API" do
   it "finds all by credit card number" do
+    transactions = create_list(:transaction, 3)
 
+    get "/api/v1/transactions/find_all?credit_card_number=#{transactions[1].credit_card_number}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(3)
   end
 
   it "finds all by created at" do
+    transaction1, transaction2 = create_list(:transaction, 2, created_at: "Dec 11 2008")
+    transaction3 = create(:transaction, created_at: "Jun 01 1998")
 
+    get "/api/v1/transactions/find_all?created_at=#{transaction1.created_at}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(2)
   end
 
   it "finds all by updated at" do
+    transaction1, transaction2 = create_list(:transaction, 2, updated_at: "Dec 11 2008")
+    transaction3 = create(:transaction, updated_at: "Jun 01 1998")
 
+    get "/api/v1/transactions/find_all?updated_at=#{transaction1.updated_at}"
+
+    result = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(result.count).to eq(2)
   end
 end
