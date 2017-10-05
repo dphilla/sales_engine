@@ -34,6 +34,17 @@ describe "Transactions API" do
     expect(result["credit_card_number"]).to eq(transaction.credit_card_number)
   end
 
+  it "finds by result" do
+    transaction = create(:transaction)
+
+    get "/api/v1/transactions/find?result=#{transaction.result}"
+
+    output = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(output["result"]).to eq(transaction.result)
+  end
+
   it "finds by created at" do
     transaction = create(:transaction, created_at: "Aug 1 1999")
 
@@ -67,6 +78,18 @@ describe "Transactions API" do
 
     expect(response).to be_success
     expect(result.count).to eq(3)
+  end
+
+  it "finds all by result" do
+    transaction1, transaction2 = create_list(:transaction, 2)
+    transaction3 = create(:transaction, result: "failed")
+
+    get "/api/v1/transactions/find_all?result=#{transaction1.result}"
+
+    output = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(output.count).to eq(2)
   end
 
   it "finds all by created at" do
