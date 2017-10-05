@@ -3,5 +3,4 @@ class Transaction < ApplicationRecord
 
   scope :successful, -> { where(result: "success")}
 
-  #default scope?
 end

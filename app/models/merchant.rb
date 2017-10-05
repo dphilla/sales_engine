@@ -12,13 +12,13 @@ class Merchant < ApplicationRecord
             .limit(quantity) #should add condition for non-nums, etc.
   end
 
-  def self.top_by_most_items(quantity)
-     Merchant.joins(invoices: [:transactions, :invoice_items])
-            .merge(Transaction.successful)
-            .group(:id)
-            .order("sum(quantity) DESC")
-            .limit(quantity)
-  end
+  #def self.top_by_most_items(quantity)
+     #Merchant.joins(invoices: [:transactions, :invoice_items])
+            #.merge(Transaction.successful)
+            #.group(:id)
+            #.order("sum(quantity) DESC")
+            #.limit(quantity)
+  #end
 
   #def self.top_by_most_items(date)
     #Merchant.joins(invoices: [:transactions, :invoice_items])
