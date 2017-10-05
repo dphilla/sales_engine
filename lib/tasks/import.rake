@@ -1,7 +1,6 @@
 require 'rake'
 require 'csv'
 
-
 task :import => [:environment] do
 
 Merchant.destroy_all
