@@ -42,6 +42,11 @@ class Merchant < ApplicationRecord
     .sum('quantity * unit_price')
   end
 
+  def self.favorite_customer(id)
+    joins(invoices: [:invoice_items, :transactions])
+    .merge(Transaction.unscoped.successful)
+    .where(invoices: {customer_id: "#{id}"})
+  end
 
 
 end
