@@ -9,4 +9,9 @@ class ApplicationController < ActionController::API
     {"total_revenue": "#{raw}"}
   end
 
+  def format_revenue_raw(raw)
+    raw = (raw.to_f / 100)
+    {"revenue": "#{raw}"}
+  end
+
 end

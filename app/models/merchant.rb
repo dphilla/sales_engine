@@ -27,8 +27,11 @@ class Merchant < ApplicationRecord
     .sum('quantity * unit_price')
   end
 
-  def format_raw(raw)
-    {"total_revenue": raw}
+  def self.total_revenue_for_merchant(id)
+    joins(invoices: [:invoice_items, :transactions])
+    .merge(Transaction.unscoped.successful)
+    .where(invoices: {merchant_id: "#{id}"})
+    .sum('quantity * unit_price')
   end
 
 
