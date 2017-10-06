@@ -1,4 +1,4 @@
-module Api # a more common namespacing technique (as opposed to scope resolution ops)
+module Api 
   module V1
     class InvoicesController < ApplicationController
 
