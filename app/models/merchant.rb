@@ -20,6 +20,9 @@ class Merchant < ApplicationRecord
             .limit(quantity)
   end
 
+
+ 
+
   def self.total_revenue_by_date(date=nil)
     joins(invoices: [:invoice_items, :transactions])
     .merge(Transaction.unscoped.successful)
