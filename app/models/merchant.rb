@@ -20,11 +20,7 @@ class Merchant < ApplicationRecord
             .limit(quantity)
   end
 
-  #def self.top_by_most_items(date)
-             #Merchant.joins(invoices: [:transactions, :invoice_items])
-             #.merge(Transaction.successful). #.wherewhere("invoices.created_at: date)
-            #.sum("(quantity * unit_price)")
-      #end
+  
 
   def self.total_revenue_by_date(date=nil)
     joins(invoices: [:invoice_items, :transactions])

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get "/random", to: "search#rand"
         get "/merchant", to: "find_merchant#show"
         get "/most_revenue", to: "top_items#index"
+        get "/most_items", to: "top_sold#index"
       end
 
       namespace :transactions do

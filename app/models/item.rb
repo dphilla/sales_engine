@@ -28,4 +28,11 @@ class Item < ApplicationRecord
     .limit(quantity)
   end
 
+  def self.most_items(quantity=nil)
+    unscoped.joins(invoices: [:transactions])
+    .merge(Transaction.successful)
+    .group(:id)
+    .order("sum(quantity) DESC")
+    .limit(quantity)
+  end
 end
