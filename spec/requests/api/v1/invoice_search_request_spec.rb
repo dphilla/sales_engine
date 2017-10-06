@@ -49,27 +49,6 @@ describe "Invoice Endpoint" do
     expect(invoice["status"]).to eq(invoice1.status)
   end
 
-  xit "finds by created_at" do
-    invoice1, invoice2, invoice3 = create_list(:invoice, 3, created_at: "2008-12-11 00:00:00.000000000 +0000")
-
-    get "/api/v1/invoices/find?created_at=#{invoice1.created_at}"
-
-    invoice = JSON.parse(response.body)
-
-    expect(response).to be_success
-    expect(invoice["created_at"]).to eq(invoice1.created_at)
-  end
-
-  xit "finds by updated at" do
-    create(:merchant, id: 1)
-    invoice1, invoice2, invoice3 = create_list(:invoice, 3,  updated_at: "2008-12-11 00:00:00.000000000 +0000")
-
-    get "/api/v1/invoices/find?updated_at=#{invoice1.updated_at}"
-
-    invoice = JSON.parse(response.body)
-
-    expect(response).to be_success
-    expect(invoice["updated_at"]).to eq(invoice1.updated_at)
-  end
+  
 
 end
