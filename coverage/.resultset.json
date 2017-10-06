@@ -213,6 +213,7 @@
         1,
         1,
         1,
+        1,
         null,
         null,
         null,
@@ -278,6 +279,22 @@
         null,
         null,
         null,
+
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        n
         null
       ],
       "/Users/danielphillips/turing/3module/sales_engine/rails_engine/app/models/application_record.rb": [
@@ -774,6 +791,5 @@
         null
       ]
     },
-    "timestamp": 1507255987
   }
 }
